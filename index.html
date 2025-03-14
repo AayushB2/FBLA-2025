@@ -211,7 +211,11 @@ Would you like to play again: &lt;&lt;link &quot;Starting Page&quot; &quot;Start
 &lt;&lt;button &quot;Stop&quot;&gt;&gt;
 	&lt;&lt;set $savedPosition = passage()&gt;&gt;
     &lt;&lt;goto &quot;Starting Page&quot;&gt;&gt;
-&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="14" name="Start" tags="General-Story" position="600,400" size="100,100">*You get seated and start listening to the opening ceremony*
+&lt;&lt;/button&gt;&gt;
+&lt;&lt;set $firstGameFailCount = 0&gt;&gt;
+&lt;&lt;set $secondGameFailCount = 0&gt;&gt;
+&lt;&lt;set $thirdGameFailCount = 0&gt;&gt;
+</tw-passagedata><tw-passagedata pid="14" name="Start" tags="General-Story" position="600,400" size="100,100">*You get seated and start listening to the opening ceremony*
 
 Mr. FBLA - &quot;Ladies and gentlemen, welcome to the annual NC FBLA carnival. My name is Franklin Bernard Louis Armstrong, but you can call me Mr. FBLA.&quot;
 
@@ -244,7 +248,6 @@ Exit game: &lt;&lt;link &quot;Exit&quot; &quot;Exit&quot;&gt;&gt; &lt;&lt;/link&
 &lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="17" name="Trait Matching Start" tags="Minigames" position="725,1175" size="100,100">Welcome to the Leadership Trait Minigame! In this game you will be given a list of traits and will have to determine which two traits are the most necessary to have as a leader.
 
 &lt;&lt;link &quot;Start Game&quot; &quot;First Trait Matching Checklist&quot;&gt;&gt; &lt;&lt;/link&gt;&gt;
-&lt;&lt;set $firstGameFailCount = 0&gt;&gt;
 
 &lt;&lt;button &quot;Stop&quot;&gt;&gt;
 	&lt;&lt;set $savedPosition = passage()&gt;&gt;
@@ -426,7 +429,6 @@ Exit game: &lt;&lt;link &quot;Exit&quot; &quot;Exit&quot;&gt;&gt; &lt;&lt;/link&
 &lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="24" name="Intro Before Second Game" tags="Minigames" position="1225,1175" size="100,100">Welcome to the Pitch Minigame! In this game you will be given different product pitches and will have to determine which pitch is most likely to succeed.
 
 &lt;&lt;link &quot;Start Game&quot; &quot;First Pitch Checklist&quot;&gt;&gt; &lt;&lt;/link&gt;&gt;
-&lt;&lt;set $secondGameFailCount = 0&gt;&gt;
 &lt;&lt;button &quot;Stop&quot;&gt;&gt;
 	&lt;&lt;set $savedPosition = passage()&gt;&gt;
     &lt;&lt;goto &quot;Starting Page&quot;&gt;&gt;
@@ -598,7 +600,6 @@ Exit game: &lt;&lt;link &quot;Exit&quot; &quot;Exit&quot;&gt;&gt; &lt;&lt;/link&
 &lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="31" name="Intro Before Third Game" tags="Minigames" position="1750,1175" size="100,100">Welcome to the Role Assigning Minigame! In this game you must pick the best suited person for a job amongst a group of candidates.
 
 &lt;&lt;link &quot;Start Game&quot; &quot;First Role Assigning&quot;&gt;&gt; &lt;&lt;/link&gt;&gt;
-&lt;&lt;set $thirdGameFailCount = 0&gt;&gt;
 &lt;&lt;button &quot;Stop&quot;&gt;&gt;
 	&lt;&lt;set $savedPosition = passage()&gt;&gt;
     &lt;&lt;goto &quot;Starting Page&quot;&gt;&gt;
