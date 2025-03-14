@@ -142,11 +142,11 @@ Mr. FBLA - &quot;You hear my voice yet you still didn&#39;t even move a muscle?!
 &lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="5" name="Exit" tags="General-Info" position="900,200" size="100,100">&lt;&lt;print &quot;Thank you for playing this interactive story game!&quot;&gt;&gt;
 
 &lt;&lt;print &quot;Select the things below you may want to look at from your journey and we will generate a report for you.&quot;&gt;&gt;
-
+&lt;&lt;nobr&gt;&gt;
 &lt;&lt;set $MistakesMade = false&gt;&gt;
 &lt;&lt;set $endingPoints = false&gt;&gt;
 &lt;&lt;set $uniqueTimeline = false&gt;&gt;
-
+&lt;&lt;/nobr&gt;&gt;
 &lt;label&gt;&lt;&lt;checkbox &quot;$MistakesMade&quot; false true  &gt;&gt; Report Total Mistakes Made &lt;/label&gt;
 &lt;label&gt;&lt;&lt;checkbox &quot;$endingPoints&quot; false true  &gt;&gt; Report Total Points &lt;/label&gt;
 &lt;label&gt;&lt;&lt;checkbox &quot;$uniqueTimeline&quot; false true  &gt;&gt; Report Timeline Uniqueness  &lt;/label&gt;
@@ -156,7 +156,12 @@ Mr. FBLA - &quot;You hear my voice yet you still didn&#39;t even move a muscle?!
 &lt;&lt;/button&gt;&gt;
 
 Would you like to play again: &lt;&lt;link &quot;Starting Page&quot; &quot;Starting Page&quot;&gt;&gt; &lt;&lt;/link&gt;&gt;
-&lt;&lt;set $savedPosition = &quot;Starting Page&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="6" name="Explore the carnival" tags="General-Story" position="700,600" size="100,100">-You start exploring what to do at the carnival. There are a lot of interesting activities. *A few minutes pass by* while deciding on what to do, you find a no caller ID calling you-
+&lt;&lt;set $savedPosition = &quot;Starting Page&quot;&gt;&gt;
+&lt;&lt;set $firstGameFailCount = 5&gt;&gt;
+&lt;&lt;set $secondGameFailCount = 2&gt;&gt;
+&lt;&lt;set $thirdGameFailCount = 0&gt;&gt;
+&lt;&lt;set $points = 500&gt;&gt;
+&lt;&lt;set $AlLierTimeline = true&gt;&gt;</tw-passagedata><tw-passagedata pid="6" name="Explore the carnival" tags="General-Story" position="700,600" size="100,100">-You start exploring what to do at the carnival. There are a lot of interesting activities. *A few minutes pass by* while deciding on what to do, you find a no caller ID calling you-
 
 &lt;&lt;link &quot;Answer call&quot; &quot;Answer call&quot;&gt;&gt; &lt;&lt;/link&gt;&gt;
 &lt;&lt;link &quot;Ignore call&quot; &quot;Ignore call&quot;&gt;&gt; &lt;&lt;/link&gt;&gt;
@@ -253,13 +258,17 @@ Exit game: &lt;&lt;link &quot;Exit&quot; &quot;Exit&quot;&gt;&gt; &lt;&lt;/link&
 	&lt;&lt;set $savedPosition = passage()&gt;&gt;
     &lt;&lt;goto &quot;Starting Page&quot;&gt;&gt;
 &lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="First Trait Matching Checklist" tags="Minigames" position="850,1175" size="100,100">&lt;&lt;print &quot;Which two things does a leader need most? Arrogance, Empathy, Dishonesty, Vanity, Integrity&quot;&gt;&gt;
+
 &lt;&lt;nobr&gt;&gt;
+  &lt;!-- Initialize boolean variables for each trait --&gt;
   &lt;&lt;set $Arrogance = false&gt;&gt;
   &lt;&lt;set $Empathy = false&gt;&gt;
   &lt;&lt;set $Dishonesty = false&gt;&gt;
   &lt;&lt;set $Vanity = false&gt;&gt;
   &lt;&lt;set $Integrity = false&gt;&gt;
 &lt;&lt;/nobr&gt;&gt;
+
+&lt;!-- Checkbox options for selecting traits --&gt;
 &lt;label&gt;&lt;&lt;checkbox &quot;$Arrogance&quot; false true  &gt;&gt; Arrogance?&lt;/label&gt;
 &lt;label&gt;&lt;&lt;checkbox &quot;$Empathy&quot; false true  &gt;&gt; Empathy?&lt;/label&gt;
 &lt;label&gt;&lt;&lt;checkbox &quot;$Dishonesty&quot; false true  &gt;&gt; Dishonesty?&lt;/label&gt;
@@ -267,14 +276,18 @@ Exit game: &lt;&lt;link &quot;Exit&quot; &quot;Exit&quot;&gt;&gt; &lt;&lt;/link&
 &lt;label&gt;&lt;&lt;checkbox &quot;$Integrity&quot; false true  &gt;&gt; Integrity?&lt;/label&gt;
 
 &lt;&lt;button &quot;Submit&quot;&gt;&gt; 
+    &lt;!-- Store selected values in a list --&gt;
 	&lt;&lt;set $list = [$Arrogance, $Empathy, $Dishonesty, $Vanity, $Integrity]&gt;&gt;
     &lt;&lt;set _amountChosen = 0&gt;&gt;
+    
+    &lt;!-- Loop through the list to count selected traits --&gt;
     &lt;&lt;for _i to 0; _i lt $list.length; _i++&gt;&gt;
         &lt;&lt;if $list[_i] === true&gt;&gt;
             &lt;&lt;set _amountChosen += 1&gt;&gt;
         &lt;&lt;/if&gt;&gt;
     &lt;&lt;/for&gt;&gt;
     
+    &lt;!-- Check if exactly two traits are selected --&gt;
     &lt;&lt;if _amountChosen == 2&gt;&gt;
     	&lt;&lt;goto &quot;First Answer Check&quot;&gt;&gt;
     &lt;&lt;else&gt;&gt;
@@ -282,10 +295,12 @@ Exit game: &lt;&lt;link &quot;Exit&quot; &quot;Exit&quot;&gt;&gt; &lt;&lt;/link&
     &lt;&lt;/if&gt;&gt;
 &lt;&lt;/button&gt;&gt;
 
+&lt;!-- Button to stop and return to the starting page --&gt;
 &lt;&lt;button &quot;Stop&quot;&gt;&gt;
 	&lt;&lt;set $savedPosition = passage()&gt;&gt;
     &lt;&lt;goto &quot;Starting Page&quot;&gt;&gt;
-&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="First Answer Check" tags="Minigames" position="975,1175" size="100,100">&lt;&lt;if $Empathy &amp;&amp; $Integrity === true&gt;&gt;
+&lt;&lt;/button&gt;&gt;
+</tw-passagedata><tw-passagedata pid="19" name="First Answer Check" tags="Minigames" position="975,1175" size="100,100">&lt;&lt;if $Empathy &amp;&amp; $Integrity === true&gt;&gt;
 	&lt;&lt;print &quot;Good job! You really know your stuff.&quot;&gt;&gt;
     &lt;&lt;link &quot;Next Question&quot; &quot;Second Trait Matching Checklist&quot;&gt;&gt; &lt;&lt;/link&gt;&gt;
   &lt;&lt;else&gt;&gt;
@@ -1022,7 +1037,7 @@ Exit game: &lt;&lt;link &quot;Exit&quot; &quot;Exit&quot;&gt;&gt; &lt;&lt;/link&
     &lt;&lt;/if&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
-&lt;&lt;link &quot;Go back and generate new report&quot; &quot;Exit&quot;&gt;&gt; &lt;&lt;/link
+&lt;&lt;link &quot;Go back and generate new report&quot; &quot;Exit&quot;&gt;&gt; &lt;&lt;/link&gt;&gt;
 &lt;&lt;link &quot;Go to Starting Page&quot; &quot;Starting Page&quot;&gt;&gt; &lt;&lt;/link&gt;&gt;</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
 	/*! SugarCube JS */
