@@ -153,6 +153,22 @@ h1, h2, h3 {
   	background-color: white;
 }
 
+
+.phone-gif {
+  	float: left;
+    left: 0px;  /* Moves it to the left */
+    width: 200px; /* Resize */
+    height: 200px;
+  	margin: 0px;
+  	padding: 0px;
+}
+
+
+
+table td:nth-child(2) {
+    text-align: center;  /* Centers the text in the second column */
+}
+
 /* Link styling */
 a {
     color: #3a1db1;
@@ -237,7 +253,9 @@ Mr. FBLA - &quot;You hear my voice yet you still didn&#39;t even move a muscle?!
 &lt;&lt;/button&gt;&gt;
 
 Would you like to play again: &lt;&lt;link &quot;Starting Page&quot; &quot;Starting Page&quot;&gt;&gt; &lt;&lt;/link&gt;&gt;
-&lt;&lt;set $savedPosition = &quot;Starting Page&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="6" name="Explore the carnival" tags="General-Story" position="700,600" size="100,100">-You start exploring what to do at the carnival. There are a lot of interesting activities. *A few minutes pass by* while deciding on what to do, you find a no caller ID calling you-
+&lt;&lt;set $savedPosition = &quot;Starting Page&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="6" name="Explore the carnival" tags="General-Story" position="700,600" size="100,100">&lt;img src=&quot;https://media0.giphy.com/media/CNfKoyvLXuHged43dr/giphy.gif&quot; class=&quot;phone-gif&quot;&gt;
+
+&lt;&lt;print &quot;-You start exploring what to do at the carnival. There are a lot of interesting activities. *A few minutes pass by* while deciding on what to do, you find a no caller ID calling you-&quot;&gt;&gt;
 
 &lt;&lt;link &quot;Answer call&quot; &quot;Answer call&quot;&gt;&gt; &lt;&lt;/link&gt;&gt;
 &lt;&lt;link &quot;Ignore call&quot; &quot;Ignore call&quot;&gt;&gt; &lt;&lt;/link&gt;&gt;
@@ -279,7 +297,9 @@ Would you like to play again: &lt;&lt;link &quot;Starting Page&quot; &quot;Start
 
 3. This is the most important rule: Have fun!!!!!!!!!!!
 
-&lt;&lt;link &quot;Starting Page&quot; &quot;Starting Page&quot;&gt;&gt; &lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="Meet up with some friends" tags="General-Story" position="600,700" size="100,100">-You meet up with some friends, but a few minutes later a no caller ID calls you-
+&lt;&lt;link &quot;Starting Page&quot; &quot;Starting Page&quot;&gt;&gt; &lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="Meet up with some friends" tags="General-Story" position="600,700" size="100,100">&lt;img src=&quot;https://media0.giphy.com/media/CNfKoyvLXuHged43dr/giphy.gif&quot; class=&quot;phone-gif&quot;&gt;
+
+-You meet up with some friends, but a few minutes later a no caller ID calls you-
 
 &lt;&lt;link &quot;Answer call&quot; &quot;Answer call&quot;&gt;&gt; &lt;&lt;/link&gt;&gt;
 &lt;&lt;link &quot;Ignore call&quot; &quot;Ignore call&quot;&gt;&gt; &lt;&lt;/link&gt;&gt;
@@ -1096,7 +1116,59 @@ Exit: &lt;&lt;link &quot;Exit Game&quot; &quot;Close Tab&quot;&gt;&gt; &lt;&lt;/
 &lt;&lt;button &quot;Stop&quot;&gt;&gt;
 	&lt;&lt;set $savedPosition = passage()&gt;&gt;
     &lt;&lt;goto &quot;Starting Page&quot;&gt;&gt;
-&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="49" name="Output Report" tags="General-Info" position="1025,200" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="49" name="Output Report" tags="General-Info" position="1025,200" size="100,100">&lt;table id=&quot;report-table&quot;&gt;&lt;/table&gt;&lt;&lt;script&gt;&gt;
+$(document).ready(function() {
+    function generateReportHead(table, data){
+        let thead = table.createTHead();
+        let row = thead.insertRow();
+        for(let key of data){
+            let th = document.createElement(&quot;th&quot;);
+            let text = document.createTextNode(key);
+            th.appendChild(text);
+            row.appendChild(th);
+        }
+    }
+
+    function generateReport(table, data) {
+        for (let element of data) {
+            let row = table.insertRow();
+            for (let key in element) {  
+                let cell = row.insertCell();
+                let text = document.createTextNode(element[key]);
+                cell.appendChild(text);
+            }
+        }
+    }
+
+    let table_data = [];
+
+    if (State.variables.MistakesMade === true) {
+        table_data.push({Category: &quot;First Minigame Mistakes&quot;, Outcome: State.variables.firstGameFailCount});
+        table_data.push({Category: &quot;Second Minigame Mistakes&quot;, Outcome: State.variables.secondGameFailCount});
+        table_data.push({Category: &quot;Third Minigame Mistakes&quot;, Outcome: State.variables.thirdGameFailCount});
+        table_data.push({Category: &quot;Total Minigame Mistakes&quot;,
+            Outcome: (State.variables.firstGameFailCount + State.variables.secondGameFailCount + State.variables.thirdGameFailCount)
+        });
+    }
+
+    if (State.variables.endingPoints === true) {
+        table_data.push({Category: &quot;Ending Points&quot;, Outcome: State.variables.points});
+    }
+
+    if (State.variables.uniqueTimeline === true) {
+        table_data.push({Category: &quot;Unique Timeline&quot;, Outcome: State.variables.AlLierTimeline});
+    }
+
+    let table = document.getElementById(&quot;report-table&quot;);
+
+    if (table &amp;&amp; table_data.length &gt; 0) {  // Ensure the table exists
+        let data = Object.keys(table_data[0]);
+        generateReportHead(table, data);
+        generateReport(table, table_data);
+    }
+});
+&lt;&lt;/script&gt;&gt;
+&lt;&lt;nobr&gt;&gt;
 &lt;&lt;if $MistakesMade === true&gt;&gt;
 	&lt;&lt;print &quot;Across all your attempts of the first minigame you made &quot; + $firstGameFailCount + &quot; mistakes&quot;&gt;&gt;
 	&lt;&lt;print &quot;Across all your attempts of the second minigame you made &quot; + $secondGameFailCount + &quot; mistakes&quot;&gt;&gt;
