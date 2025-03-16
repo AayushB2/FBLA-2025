@@ -1439,11 +1439,11 @@ $(document).ready(function() {
         &lt;!-- Check if the entered name is in the $users array --&gt;
         &lt;&lt;if $users.includes($current_user) != true&gt;&gt;
             &lt;&lt;set $users.push({name: $current_user})&gt;&gt; &lt;!-- Add the user to the array --&gt;
-            &lt;&lt;run $(&quot;#login&quot;).text(&quot;Welcome, &quot; + $current_user + &quot;!&quot; + &quot; Click below to go to the starting page.&quot;)&gt;&gt;
-            &lt;&lt;run $(&quot;#login&quot;).append(&#39;\n&lt;a href=&quot;javascript:Engine.play(\&#39;Starting Page\&#39;)&quot;&gt;Starting Page&lt;/a&gt;&#39;)&gt;&gt;
+            &lt;&lt;run $(&quot;#login&quot;).text(&quot;Welcome, &quot; + $current_user + &quot;!&quot; + &quot; You will now be taken to the startup page.&quot;)&gt;&gt;
+            &lt;&lt;run setTimeout(function() { Engine.play(&quot;Starting Page&quot;); }, 1500)&gt;&gt;
         &lt;&lt;else&gt;&gt;
-            &lt;&lt;run $(&quot;#login&quot;).text(&quot;Welcome back, &quot; + $current_user + &quot;!&quot;+ &quot; Click below to go to the starting page.&quot;)&gt;&gt;
-            &lt;&lt;run $(&quot;#login&quot;).append(&#39;\n&lt;a href=&quot;javascript:Engine.play(\&#39;Starting Page\&#39;)&quot;&gt;Starting Page&lt;/a&gt;&#39;)&gt;&gt;
+            &lt;&lt;run $(&quot;#login&quot;).text(&quot;Welcome back, &quot; + $current_user + &quot;!&quot;+ &quot; You will now be taken to the startup page.&quot;)&gt;&gt;
+            &lt;&lt;run setTimeout(function() { Engine.play(&quot;Starting Page&quot;); }, 1500)&gt;&gt;
         &lt;&lt;/if&gt;&gt;
     &lt;&lt;else&gt;&gt;
         &lt;&lt;run $(&quot;#login&quot;).text(&quot;Please enter a name first!&quot;)&gt;&gt; &lt;!-- This message appears if the user hasn&#39;t entered their name --&gt;
