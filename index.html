@@ -1493,6 +1493,7 @@ Exit: &lt;&lt;link &quot;Exit Game&quot; &quot;Close Tab&quot;&gt;&gt; &lt;&lt;/
 
 &lt;&lt;link &quot;Start Game&quot; &quot;Rigged Challenge Checklist&quot;&gt;&gt; &lt;&lt;/link&gt;&gt;
 &lt;&lt;set $timesButtonPressed = 0&gt;&gt;
+&lt;&lt;set $AlLierAssociate = false&gt;&gt;
 &lt;&lt;button &quot;Stop&quot;&gt;&gt;
     &lt;!-- Save the current position --&gt;
     &lt;&lt;set $savedPosition = passage()&gt;&gt;
@@ -1600,14 +1601,14 @@ Exit: &lt;&lt;link &quot;Exit Game&quot; &quot;Close Tab&quot;&gt;&gt; &lt;&lt;/
         &lt;&lt;link &quot;Step outside&quot; &quot;Mr. FBLA Al Lier Reveal&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
     &lt;&lt;else&gt;&gt;
      	&lt;&lt;print &quot;A voices comes over an intercom.&quot;&gt;&gt;
-        &lt;&lt;print &#39;&quot;Voice- We know what you did. You must forfeit this minigame. Please step outside for a moment as we need to have a word with you.&quot;&#39;&gt;&gt;
+        &lt;&lt;print &#39;&quot;Voice- We know what you did. You must forfeit now. Please step outside for a moment as we need to have a word with you.&quot;&#39;&gt;&gt;
         &lt;&lt;link &quot;Leave the game in shame&quot; &quot;Mr FBLA Confrontation&quot;&gt;&gt; &lt;&lt;/link&gt;&gt; 
     &lt;&lt;/if&gt;&gt;
 &lt;&lt;else&gt;&gt;
 	&lt;&lt;print &quot;That is incorrect.&quot;&gt;&gt;
     &lt;&lt;if $AlLierAssociate === false&gt;&gt;
     	&lt;&lt;print &quot;Unfortunately, you have failed once again. There is some good news though. There&#39;s someone who wants to see you outside.&quot;&gt;&gt;
-        &lt;&lt;link &quot;Step outside&quot; &quot;Mr. FBLA Al Lier Reveal&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
+        &lt;&lt;link &quot;Step outside&quot; &quot;Mr FBLA Al Lier Reveal&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
     &lt;&lt;else&gt;&gt;
      	&lt;&lt;print &quot;A voices comes over an intercom.&quot;&gt;&gt;
         &lt;&lt;print &#39;&quot;Voice- We know what you did. You must forfeit this minigame. Please step outside for a moment as we need to have a word with you.&quot;&#39;&gt;&gt;
